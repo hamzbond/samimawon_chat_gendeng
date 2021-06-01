@@ -58,12 +58,11 @@ class Chats extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Text('Built with '),
+                      Text('built by hamzbond with '),
                       Icon(
                         Icons.favorite,
                         color: Colors.blue,
                       ),
-                      Text(' in Flutter')
                     ],
                   ),
                 ],
