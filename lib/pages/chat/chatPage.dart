@@ -20,6 +20,8 @@ class ChatDetails extends StatefulWidget {
 }
 
 class _ChatDetailsState extends State<ChatDetails> {
+  double _rating = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,9 +55,24 @@ class _ChatDetailsState extends State<ChatDetails> {
                     color: Colors.grey[400],
                     fontSize: 12,
                   ),
-                )
+                ),
               ],
-            )
+            ),
+            SizedBox(width: 40),
+            Container(
+              child: 
+                TextButton(
+                  onPressed: () {
+                    showModalBottomSheet<void>(
+                      context: context, 
+                      builder: (BuildContext context) {
+                        return RatingStarFull(starCount: 5, rating: 5, onRatingChanged: (rat) {setState(() {this._rating = rat;});}, color: Theme.of(context).primaryColor);
+                      }
+                    );
+                  }, 
+                  child: Text('Bintang 5 nya kaka :) :)')
+                ),
+            ),
           ],
         ),
       ),
@@ -232,6 +249,76 @@ class Bubble extends StatelessWidget {
           )
         ],
       ),
+    );
+  }
+}
+
+
+typedef void RatingChangeCallback(double rating);
+
+class RatingStarFull extends StatefulWidget {
+
+  final int starCount;
+  final double rating;
+  final RatingChangeCallback onRatingChanged;
+  final Color color;
+
+  RatingStarFull({required this.starCount, required this.rating, required this.onRatingChanged, required this.color});
+
+  @override
+  State<StatefulWidget> createState() {
+    return _RatingStarState(starCount, rating, onRatingChanged, color);
+  }
+
+}
+
+class _RatingStarState extends State<RatingStarFull> {
+
+  final int starCount;
+  double rating;
+  final RatingChangeCallback onRatingChanged;
+  final Color color;
+
+
+  _RatingStarState(this.starCount, this.rating, this.onRatingChanged,
+      this.color);
+
+  Widget buildStar(BuildContext context, int index) {
+    Icon icon;
+    if (index >= rating) {
+      icon = new Icon(
+        Icons.star_border,
+        color: Theme.of(context).buttonColor,
+      );
+    }
+    else if (index > rating - 1 && index < rating) {
+      icon = new Icon(
+        Icons.star_half,
+        color: Theme.of(context).primaryColor,
+      );
+    } else {
+      icon = new Icon(
+        Icons.star,
+        color: Theme.of(context).primaryColor,
+      );
+    }
+    return new GestureDetector(
+      onTap: onRatingChanged == null ? null : () {
+        onRatingChanged(index + 1.0);
+        setState(() {
+          this.rating = index + 1.0;
+        });
+      },
+      child: icon,
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: new List.generate(starCount, (index) => buildStar(context, index)
+        )
     );
   }
 }
