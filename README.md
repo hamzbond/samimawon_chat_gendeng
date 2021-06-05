@@ -1,1 +1,1 @@
-samimawon_chat_gendeng
+aplikasi samimawon chat gendeng terinspirasi dari chatbot simi simi. tampilannya sederhana, dan fitur utamanya adalah chat gendeng dengan samimawon si raja hutan. jawaban jawaban chat adalah murni dari api dan belum dicoba sepenuhnya, jadi kalo ada jawaban yang rasis, merusak akal, atau tidak pantas ya mohon maklum, hehehe
