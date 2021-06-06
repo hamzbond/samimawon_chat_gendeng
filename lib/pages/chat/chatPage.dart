@@ -58,21 +58,6 @@ class _ChatDetailsState extends State<ChatDetails> {
                 ),
               ],
             ),
-            SizedBox(width: 40),
-            Container(
-              child: 
-                TextButton(
-                  onPressed: () {
-                    showModalBottomSheet<void>(
-                      context: context, 
-                      builder: (BuildContext context) {
-                        return RatingStarFull(starCount: 5, rating: 5, onRatingChanged: (rat) {setState(() {this._rating = rat;});}, color: Theme.of(context).primaryColor);
-                      }
-                    );
-                  }, 
-                  child: Text('Bintang 5 nya kaka :) :)')
-                ),
-            ),
           ],
         ),
       ),
@@ -118,6 +103,24 @@ class _ChatDetailsState extends State<ChatDetails> {
               ]),
               child: Row(
                 children: <Widget>[
+                  Container(
+                    child: Column(
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            showModalBottomSheet<void>(
+                              context: context, 
+                              builder: (BuildContext context) {
+                                return RatingStarFull(starCount: 5, rating: 5, onRatingChanged: (rat) {setState(() {this._rating = rat;});}, color: Theme.of(context).primaryColor);
+                              }
+                            );
+                          }, 
+                          icon: Icon(Icons.star),
+                        ),
+                        Text('Rate me')
+                      ],
+                    ),
+                  ),
                   Padding(
                     padding: EdgeInsets.only(left: 15),
                   ),
